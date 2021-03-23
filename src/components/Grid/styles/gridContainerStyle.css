@@ -1,0 +1,45 @@
+.custom-gird-container {
+    display: flex;
+}
+
+/* for spacing */
+.custom-grid-spacing-1 {
+    width: calc(100% + 40px);
+    margin: -20px;
+}
+.custom-grid-spacing-2 {
+    width: calc(100% + 16px);
+    margin: -8px;
+}
+.custom-grid-spacing-3 {
+    width: calc(100% + 24px);
+    margin: -12px;
+}
+.custom-grid-spacing-4 {
+    width: calc(100% + 32px);
+    margin: -16px;
+}
+.custom-grid-spacing-5 {
+    width: calc(100% + 40px);
+    margin: -20px;
+}
+.custom-grid-spacing-6 {
+    width: calc(100% + 48px);
+    margin: -24px;
+}
+.custom-grid-spacing-7 {
+    width: calc(100% + 56px);
+    margin: -28px;
+}
+.custom-grid-spacing-8 {
+    width: calc(100% + 64px);
+    margin: -32px;
+}
+.custom-grid-spacing-9 {
+    width: calc(100% + 72px);
+    margin: -36px;
+}
+.custom-grid-spacing-10 {
+    width: calc(100% + 80px);
+    margin: -40px;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import "./styles/gridItemStyle.css"
 
-const GridItem = (props) =>{
+function GridItem(props){
     let classNames = ""
     if(props.xs){
         classNames = classNames + `${classNames.length === 0 ? "":" "}custom-grid-xs-${props.xs}`

@@ -1,7 +1,7 @@
 import React from 'react'
 import "./styles/containerStyle.css"
 
-const Container = (props) =>{
+function Container(props){
     let classNames = 'custom-container'
 
     if(props.maxWidth){

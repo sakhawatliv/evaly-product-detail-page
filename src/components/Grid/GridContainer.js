@@ -1,7 +1,7 @@
 import React from 'react'
 import "./styles/gridContainerStyle.css"
 
-const GridContainer = (props) =>{
+function GridContainer(props){
     //for spacing
     let classNames = "custom-gird-container"
     if(props.spacing){

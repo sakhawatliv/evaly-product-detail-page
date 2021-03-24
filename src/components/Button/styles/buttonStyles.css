@@ -1,0 +1,9 @@
+.custom-button-v1 {
+  background-color: #c9151b;
+  color: #ffffff;
+  width: 100%;
+  min-height: 40px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}

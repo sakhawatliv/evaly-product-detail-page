@@ -1,0 +1,21 @@
+.paper {
+  width: 100%;
+}
+.br-all-10 {
+  border-radius: 10px;
+}
+.br-left {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.white-paper {
+  background-color: #ffffff;
+}
+.off-white-paper {
+  background-color: #f7fafc;
+}
+
+.ps-1 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}

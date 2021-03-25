@@ -1,15 +1,8 @@
 import React,{ useState, useEffect } from 'react'
-import axios from "axios";
 
 // library
-import {
-    Magnifier,
-    GlassMagnifier,
-    SideBySideMagnifier,
-    PictureInPictureMagnifier,
-    MOUSE_ACTIVATION,
-    TOUCH_ACTIVATION
-  } from "react-image-magnifiers";
+import axios from "axios";
+import {SideBySideMagnifier} from "react-image-magnifiers";
 
 // custom components
 import GridContainer from "../../components/Grid/GridContainer"
@@ -40,7 +33,6 @@ function ProductDetails(){
         async function fetchData(){
             const result = await axios (`https://api-dev.evaly.com.bd/go-catalog/api/v1/public/products/${productSlug}`)
             if(result){
-                debugger
                 setMainImage(result.data.data.product_variants[0].product_images[0])
                 let colorsAtr = result.data.data.attributes.find(a =>a.attribute_name === "color").attribute_data.values
                 let sizesAtr = result.data.data.attributes.find(a =>a.attribute_name === "size").attribute_data.values
@@ -64,9 +56,6 @@ function ProductDetails(){
                 setSize(variantSize)
                 setVariant(result.data.data.product_variants[0])
                 setImages(result.data.data.product_variants[0].product_images)
-                console.log(result.data.data.product_variants[0])
-               // changeVariant(colorsAtr[0].key,sizesAtr[0].key)
-
                 getShops(result.data.data.product_variants[0].variant_id)
             }
             
@@ -94,13 +83,14 @@ function ProductDetails(){
         setSize(event.target.value)
         changeVariant(color,event.target.value)
     }
+    // for changing the big image
     function changeImage(event){
-        debugger
         let imgIndex = event.currentTarget.id.split("-")[1]
         let imgUrl = images[parseInt(imgIndex)]  
         setMainImage(imgUrl)
 
     }
+    //for getting shop list
     async function getShops(variantId){
         const shopList = await axios (`https://api-dev.evaly.com.bd/go-catalog/api/v1/public/shop-items/shops/${variantId}`)
         if(shopList){
@@ -109,11 +99,12 @@ function ProductDetails(){
         }
             
     }
+    function scrollToShop(){
+        var elmntToView = document.getElementById("shop-list");
+        elmntToView.scrollIntoView({behavior: "smooth"}); 
+    }
 
 
-
-
-    //if(variant){debugger}
     return(
         <div>
             <div className="product-detail-wrapper">
@@ -165,35 +156,40 @@ function ProductDetails(){
                                                                     
                                                                 
                                                                 <GridContainer>
-                                                                    <GridItem md={3}>
-                                                                        <Select 
-                                                                            label="quantity"
-                                                                            options={[{key:1,value:"only 1"},{key:2,value:"only 2"},{key:3,value:"only 3"},{key:4,value:"only 4"},{key:5,value:"only 5"}]}
-                                                                            // value={"saab"}
-                                                                            onChange={changeColor}
-                                                                        ></Select>
+                                                                    <GridItem md={4}>
+                                                                        <div className="mb-20 mr-10">
+                                                                            <Select 
+                                                                                label="quantity"
+                                                                                options={[{key:1,value:"only 1"},{key:2,value:"only 2"},{key:3,value:"only 3"},{key:4,value:"only 4"},{key:5,value:"only 5"}]}
+                                                                            ></Select>
+                                                                        </div>
                                                                     </GridItem>
-                                                                    <GridItem md={3}>
-                                                                        <Select 
-                                                                            label="color"
-                                                                            options={colors}
-                                                                            value={color}
-                                                                            onChange={changeColor}
-                                                                        ></Select>
+                                                                    <GridItem md={4}>
+                                                                        <div className="mb-20 mr-10">
+                                                                            <Select 
+                                                                                label="color"
+                                                                                options={colors}
+                                                                                value={color}
+                                                                                onChange={changeColor}
+                                                                            ></Select>
+                                                                        </div>
                                                                     </GridItem>
-                                                                    <GridItem md={3}>
-                                                                        <Select 
-                                                                            label="size"
-                                                                            options={sizes}
-                                                                            value={size}
-                                                                            onChange={changeSize}
-                                                                        ></Select>
+                                                                    <GridItem md={4}>
+                                                                        <div>
+                                                                            <Select 
+                                                                                label="size"
+                                                                                options={sizes}
+                                                                                value={size}
+                                                                                onChange={changeSize}
+                                                                            ></Select>
+                                                                        </div>
                                                                     </GridItem>
                                                                 </GridContainer>
 
                                                                 <div className="check-shop-button">
                                                                     <Button
                                                                         btnText="Check available Shop"
+                                                                        onClick={scrollToShop}
                                                                     ></Button>
                                                                 </div>
                                                             </div>
@@ -204,7 +200,10 @@ function ProductDetails(){
                                         {/* </div> */}
                                     </GridItem>
                                     <GridItem md={3}>
-                                        <h1>Sakhawat</h1>
+                                        <div className="warranty-info text-gray">
+                                            <h4>Warranty</h4>
+                                            <h4>100% Authentic</h4>
+                                        </div>
                                     </GridItem>
                                 </GridContainer>
                             </Paper>
@@ -220,31 +219,38 @@ function ProductDetails(){
                             </Paper>
                         </div> 
 
-                        <div className="shop-area-wrapper">
+                        <div id="shop-list" className="shop-area-wrapper">
                             <div className="shop-title-area">
                                 <h2>Available Shops</h2>
                             </div>
                             <GridContainer>
-                                {shops.map((shop,index) => (
-                                    <GridItem>
-                                        <div className="shop-item mr-25">
-                                            <Card>
-                                                <CardImage src={shop.shop_image}/>
-                                                <CardBody>
-                                                    <h2>{shop.shop_name}</h2>
-                                                    <div className="shop-remark">
-                                                        <p>******</p>
-                                                        <p className="sr-price"><span>{`৳${shop.price}  `}</span>{`৳${shop.discounted_price}`}</p>
-                                                    </div>
-                                                    <div className="shop-button-area">
-                                                        <button className="shop-button bg-black">Chat</button>
-                                                        <button className="shop-button bg-red">Buy Now</button>
-                                                    </div>
-                                                </CardBody>                              
-                                            </Card>
-                                        </div>
-                                     </GridItem>
-                                ))}
+                                {shops.map((shop,index) => {
+                                    let imgClasses = "shop-item"
+                                    console.log(index)
+                                    if((index + 1) % 5 !== 0 || index === 0 || index === 1){
+                                        imgClasses = imgClasses + " " + "mr-25"
+                                    }
+                                    return(
+                                        <GridItem>
+                                            <div className={imgClasses}>
+                                                <Card>
+                                                    <CardImage src={shop.shop_image}/>
+                                                    <CardBody>
+                                                        <h2>{shop.shop_name}</h2>
+                                                        <div className="shop-remark">
+                                                            <p>******</p>
+                                                            <p className="sr-price"><span>{`৳${shop.price}  `}</span>{`৳${shop.discounted_price}`}</p>
+                                                        </div>
+                                                        <div className="shop-button-area">
+                                                            <button className="shop-button bg-black">Chat</button>
+                                                            <button className="shop-button bg-red">Buy Now</button>
+                                                        </div>
+                                                    </CardBody>                              
+                                                </Card>
+                                            </div>
+                                        </GridItem>
+                                    )}
+                                )}
                                 
                             </GridContainer>
                         </div>

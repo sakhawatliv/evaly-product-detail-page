@@ -6,7 +6,7 @@ function Select(props){
 
     return(
         <div className="select-wrapper">
-            <div>
+            <div className="select-label">
                 <label>{label}</label>
             </div>
             <div>

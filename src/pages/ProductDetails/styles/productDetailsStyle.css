@@ -70,6 +70,12 @@
 .mr-25 {
   margin-right: 25px;
 }
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
 .shop-area-wrapper {
   margin-bottom: 30px;
 }
@@ -111,4 +117,12 @@
 }
 .bg-black {
   background-color: #1d2531;
+}
+.text-gray {
+  color: #bfbcc0;
+}
+.warranty-info {
+  margin: 15px 15px 0px 15px;
+  padding: 10px 10px 2px 10px;
+  border-bottom: 1px solid gray;
 }

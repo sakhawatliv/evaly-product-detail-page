@@ -14,7 +14,8 @@
 }
 .card-image img {
   box-sizing: border-box;
-  /* width: 100%; */
+  width: auto;
+  margin: 0 auto;
   max-width: 205px;
   max-height: 120px;
   display: block;
